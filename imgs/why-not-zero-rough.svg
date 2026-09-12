@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" width="980" height="440" role="img" aria-label="On rough ground the mesh joins up corners that sit wherever the ground happens to be, and misses everything the ground does between them, so the gap is far larger and takes either sign.">
+  <style>
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      fill: #79838e;
+    }
+    .title    { font-size: 17px; font-weight: 700; }
+    .subtitle { font-size: 13.5px; }
+    .label    { font-size: 14px; font-weight: 600; }
+    .note     { font-size: 13px; }
+    .computed { fill: #c07f22; }
+    .mesh     { fill: #2183b8; }
+    .gap      { fill: #8258c0; }
+    .arc      { fill: none; stroke: #c07f22; stroke-width: 3.5; stroke-linecap: round; }
+    .chord    { fill: none; stroke: #2183b8; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+    .leader   { fill: none; stroke-width: 1.2; }
+    .ray      { fill: none; stroke: #79838e; stroke-width: 2; stroke-dasharray: 6 5; }
+    .guide    { fill: none; stroke: #79838e; stroke-width: 1; stroke-dasharray: 3 4; opacity: .6; }
+    .measure  { fill: none; stroke: #79838e; stroke-width: 1.2; }
+    .gapline  { fill: none; stroke: #8258c0; stroke-width: 2; }
+    .craft    { fill: none; stroke: #79838e; stroke-width: 1.8; stroke-linejoin: round; }
+    .corner   { fill: #79838e; }
+  </style>
+  <defs>
+    <marker id="nEnd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#79838e"/>
+    </marker>
+    <marker id="nStart" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="#79838e"/>
+    </marker>
+    <marker id="gEnd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8258c0"/>
+    </marker>
+    <marker id="gStart" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="#8258c0"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="490" y="46" text-anchor="middle">On rough ground</text>
+  <text class="subtitle" x="490" y="68" text-anchor="middle">corner after corner, the mesh joins up points that sit wherever the ground happens to be — and misses everything it does in between</text>
+
+  <!-- the ground the game computes: one continuous line, with relief of its own -->
+  <path class="arc" d="M70 250 C89.2 236.7, 137.2 171.7, 185 170 C232.8 168.3, 304.5 218.3, 357 240 C409.5 261.7, 452.2 298.3, 500 300 C547.8 301.7, 597.3 260.7, 644 250 C690.7 239.3, 732.3 247.7, 780 236 C827.7 224.3, 905.0 189.3, 930 180"/>
+  <!-- the mesh: flat pieces, corner to corner -->
+  <path class="chord" d="M70 250 L357 240 L644 250 L930 180"/>
+
+  <text class="label computed" x="232" y="130">Ground KSP computes</text>
+  <path class="leader" stroke="#c07f22" d="M300 138 L291 196"/>
+  <text class="label mesh" x="700" y="170">Ground under craft</text>
+  <path class="leader" stroke="#2183b8" d="M760 178 L762 213"/>
+
+  <circle class="corner" cx="70" cy="250" r="4.5"/>
+  <circle class="corner" cx="357" cy="240" r="4.5"/>
+  <circle class="corner" cx="644" cy="250" r="4.5"/>
+  <circle class="corner" cx="930" cy="180" r="4.5"/>
+
+  <!-- a craft under a hummock the mesh knows nothing about -->
+  <text class="note" x="169" y="108" text-anchor="middle">the ray</text>
+  <path class="craft" d="M177 246 L193 246 L189 232 L181 232 z"/>
+  <path class="ray" d="M169 118 L169 243" marker-end="url(#nEnd)"/>
+  <path class="gapline" d="M201 175 L201 242" marker-start="url(#gStart)" marker-end="url(#gEnd)"/>
+  <text class="label gap" x="110" y="300">Difference, negative</text>
+
+  <!-- a craft bridging a dip -->
+  <text class="note" x="484" y="108" text-anchor="middle">the ray</text>
+  <path class="craft" d="M492 245 L508 245 L504 231 L496 231 z"/>
+  <path class="ray" d="M484 118 L484 242" marker-end="url(#nEnd)"/>
+  <path class="gapline" d="M516 249 L516 296" marker-start="url(#gStart)" marker-end="url(#gEnd)"/>
+  <text class="label gap" x="455" y="340">Difference, positive</text>
+
+  <path class="guide" d="M70 256 L70 364 M357 246 L357 364 M644 256 L644 364 M930 186 L930 364"/>
+  <path class="measure" d="M70 370 L357 370" marker-start="url(#nStart)" marker-end="url(#nEnd)"/>
+  <path class="measure" d="M357 370 L644 370" marker-start="url(#nStart)" marker-end="url(#nEnd)"/>
+  <path class="measure" d="M644 370 L930 370" marker-start="url(#nStart)" marker-end="url(#nEnd)"/>
+  <text class="note" x="500" y="392" text-anchor="middle">≈ 150 m from one corner to the next</text>
+
+  <text class="note" x="70" y="420">Barely exaggerated here: that is metres of ground, and the gap it leaves is centimetres.</text>
+</svg>
