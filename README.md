@@ -239,6 +239,12 @@ and the one under it.
 All four campaigns were run on the same **stock install**, with nothing added to `GameData` but this
 mod. There is no mod conflict to look for, and nothing to uninstall: this is what KSP does on its own.
 
+Most players have [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes)
+installed, so the same four campaigns were run a second time in an install that has it, and those
+screenshots are in [`imgs/kspcf`](imgs/kspcf). The spread is of the same order on every world. The
+tables above stay on the stock readings on purpose: a measurement meant to show what bare KSP does is
+worth more taken where nothing else is installed.
+
 Every figure above is read straight off the screenshots above it, and nothing here asks you to take
 any of them on trust: reproducing them is what this mod is for.
 
