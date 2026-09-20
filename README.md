@@ -18,6 +18,12 @@ centimetres above it, so it drops those two centimetres. You never notice, and n
 and the physics engine will not leave two solid things overlapping. It pushes them apart, hard, in
 the only direction available: up. Your craft gets launched.
 
+![A craft jumping on its own the moment a save is reloaded](https://raw.githubusercontent.com/lhervier/KSP-TerrainPrecisionFix/master/imgs/Booing-scaled.gif)
+
+*KSP 1.12 with [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes) as the only
+mod installed. A pod on a fuel tank, parked in the grass at the KSC, saved, then reloaded from the
+pause menu — nothing touched in between.*
+
 That second case is the symptom everybody already knows. The lander that twitches, hops or flips the
 moment the scene finishes loading. The base that sat perfectly flush yesterday and is buried up to
 the hatches today. The big base that tears itself apart the very first time you load it, and never
