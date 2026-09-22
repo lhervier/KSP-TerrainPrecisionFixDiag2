@@ -4,10 +4,11 @@ using UnityEngine;
 namespace com.github.lhervier.ksp.terrainprecisionfixdiag2
 {
     /// <summary>
-    /// Ground recorder. Follows the ground under the active vessel, read the two ways the ground exists
-    /// in KSP: the surface a ray straight down actually hits, and the altitude the game computes for the
-    /// same spot. The player freezes the pair into a table whenever it suits them, and the table
-    /// survives scene changes, so reloading the same save several times builds it up line by line.
+    /// Ground recorder. Follows the ground under a craft -- the one being flown, or the target when one
+    /// is set on another craft -- read the two ways the ground exists in KSP: the surface a ray straight
+    /// down actually hits, and the altitude the game computes for the same spot. The player freezes the
+    /// pair into a table whenever it suits them, and the table survives scene changes, so reloading the
+    /// same save several times builds it up line by line.
     ///
     /// Reads the world, nothing else: it moves no vessel and touches no setting.
     /// </summary>
@@ -16,16 +17,21 @@ namespace com.github.lhervier.ksp.terrainprecisionfixdiag2
     {
         private static readonly List<Reading> READINGS = new List<Reading>();
 
-        // The line in progress, the only one that still moves -- and it only moves when the vessel does:
-        // the ground is built when the scene opens and never shifts afterwards.
+        // The line in progress, the only one that still moves.
         private readonly Reading live = new Reading();
+
+        // The vessel the readings are taken under, and what to tell the player about that choice.
+        // Refreshed by Update, displayed by OnGUI.
+        private Vessel subject;
+        private string subjectLabel = "";
 
         private void Update()
         {
             live.CollisionSurfaceMm = double.NaN;
             live.ComputedTerrainMm = double.NaN;
 
-            Vessel vessel = FlightGlobals.ActiveVessel;
+            Vessel vessel = SelectSubject(out subjectLabel);
+            subject = vessel;
             if (vessel == null || !vessel.loaded || vessel.mainBody == null
                 || vessel.mainBody.pqsController == null)
             {
@@ -42,6 +48,37 @@ namespace com.github.lhervier.ksp.terrainprecisionfixdiag2
             // vessel's own latitude and longitude, whatever the slope and however the vessel leans.
             live.CollisionSurfaceMm = MeasureCollisionSurface(vessel);
             live.ComputedTerrainMm = MeasureComputedTerrain(vessel);
+        }
+
+        /// <summary>
+        /// The vessel the readings are taken under: the target when one is set on a vessel, the craft
+        /// being flown otherwise. Null when that vessel cannot be read. <paramref name="label"/> receives
+        /// what to tell the player about the choice, including why nothing can be read.
+        /// </summary>
+        private static Vessel SelectSubject(out string label)
+        {
+            ITargetable target = (FlightGlobals.fetch == null) ? null : FlightGlobals.fetch.VesselTarget;
+            if (target != null)
+            {
+                // A target is anything targetable: a planet, a docking port, a craft. GetVessel gives
+                // the vessel behind it, and null for what is not one -- targeting a planet leaves the
+                // readings on the craft being flown rather than emptying the window.
+                Vessel targetVessel = target.GetVessel();
+                if (targetVessel != null)
+                {
+                    if (!targetVessel.loaded)
+                    {
+                        label = "Target: " + targetVessel.vesselName + " -- too far away to read";
+                        return null;
+                    }
+                    label = "Target: " + targetVessel.vesselName;
+                    return targetVessel;
+                }
+            }
+
+            Vessel active = FlightGlobals.ActiveVessel;
+            label = (active == null) ? "Nothing to read" : "Craft you are flying: " + active.vesselName;
+            return active;
         }
 
         /// <summary>
@@ -120,6 +157,11 @@ namespace com.github.lhervier.ksp.terrainprecisionfixdiag2
         {
             GUILayout.BeginVertical();
 
+            // Which craft the numbers are taken under. Without it the window reads the same whether it
+            // follows the craft being flown or the one being approached.
+            GUILayout.Label(subjectLabel);
+            GUILayout.Space(4f);
+
             // Header
             GUILayout.BeginHorizontal();
             DrawCells("Record #", "Ground under craft (mm)", "Ground KSP computes (mm)",
@@ -174,8 +216,10 @@ namespace com.github.lhervier.ksp.terrainprecisionfixdiag2
 
             if (double.IsNaN(live.CollisionSurfaceMm))
             {
-                GUILayout.Label("No ground under the craft. Land somewhere, or wait for the scene to "
-                    + "finish loading.");
+                GUILayout.Label(subject == null
+                    ? "Nothing to read there. Come closer, or clear the target to read your own craft."
+                    : "No ground under that craft. Land somewhere, or wait for the scene to finish "
+                        + "loading.");
             }
 
             // Clear table button
