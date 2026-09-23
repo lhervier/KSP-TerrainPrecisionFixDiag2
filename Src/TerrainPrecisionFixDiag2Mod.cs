@@ -201,16 +201,16 @@ namespace com.github.lhervier.ksp.terrainprecisionfixdiag2
             );
             if (GUILayout.Button("Record", GUILayout.Width(Constants.COL_BUTTON)))
             {
-                if (!double.IsNaN(live.CollisionSurfaceMm))
-                {
-                    READINGS.Add(
-                        new Reading
-                        {
-                            CollisionSurfaceMm = live.CollisionSurfaceMm,
-                            ComputedTerrainMm = live.ComputedTerrainMm
-                        }
-                    );
-                }
+                // A line with nothing to read is worth freezing too: recorded while the vessel is out
+                // of reach, it marks in the table that the two lines around it are separated by a real
+                // trip away, and not by two readings taken where the player stood.
+                READINGS.Add(
+                    new Reading
+                    {
+                        CollisionSurfaceMm = live.CollisionSurfaceMm,
+                        ComputedTerrainMm = live.ComputedTerrainMm
+                    }
+                );
             }
             GUILayout.EndHorizontal();
 
