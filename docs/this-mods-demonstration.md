@@ -86,9 +86,9 @@ ground rises between two corners, over it where it dips. None of that is the def
 about, and — the part that matters — **none of it should move from one loading to the next**: the
 shape of the terrain should be worked out the same way every time, so whatever a hillock adds to your
 reading, it ought to add again on the next loading, to the micrometre. Which is what makes the reading
-worth taking on a slope or in a crater just as much as on a lawn — the Mun and Gilly tables in
-[Six loadings of the same save](six-loadings-of-the-same-save.md) were taken on ground that is anything
-but flat. Whatever the terrain is doing, it is not what varies.
+worth taking on a slope or in a crater just as much as on a lawn — the Kerbin, Mun and Gilly tables
+in [The measurements: loading the same save](the-measurements-loading.md) were taken on ground that
+is anything but flat. Whatever the terrain is doing, it is not what varies.
 
 A legitimate zero exists, it is simply not something you can aim for: right on a corner, the one place
 where the mesh touches the surface it stands in for, and anywhere between two corners where the ground
@@ -98,7 +98,6 @@ happens to cross the flat piece spanning it. Everywhere else there is a gap.
 > triangle laid across the curve of one sags below it — the way a straight plank across the top of a
 > barrel touches only at its two ends. On Kerbin that sag is about **−5.5 mm**. It is the floor under
 > every reading, and out on ground as flat as the apron by the runway it is very nearly the whole of a
-> correct one: negative, and known before you take it. Worth holding on to for the
-> [Kerbin campaign](six-loadings-of-the-same-save.md), which was run on that apron.
+> correct one: negative, and known before you take it.
 
 **A zero is not what a healthy reading looks like. A number that repeats across loadings is.**

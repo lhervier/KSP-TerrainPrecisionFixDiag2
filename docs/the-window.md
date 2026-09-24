@@ -7,7 +7,7 @@ progress**: it carries `--` where the others carry a record number, since it is 
 *Record* button at the end of it freezes it into the table. The table survives scene changes, so the
 lines pile up as you reload.
 
-![The window, with one loading recorded and the live line under it](../imgs/50-recorded.png)
+![The window, with one loading recorded and the live line under it](../imgs/protocols/reload/50-recorded.png)
 
 | column | meaning |
 |---|---|

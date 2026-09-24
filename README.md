@@ -76,25 +76,60 @@ table. The table survives scene changes, lives in memory only, and is gone when 
 
 **→ Full chapter: [The window](docs/the-window.md)**
 
-## Six loadings of the same save
-
-The same save, loaded six times, on Kerbin, on the Mun, on Minmus and on Gilly, on a **stock install**
-with nothing in `GameData` but this mod. The computed height comes back with the same digits every
-time — spread over 0.000 mm on Kerbin and on Minmus, four or five hundredths of a millimetre at worst
-on sloping ground. The ground the craft is standing on never comes back twice: lowest to highest,
-106.6 mm on Kerbin, 8.8 mm on the Mun, 3.1 mm on Minmus, 3.7 mm on Gilly. One held still and the other
-wandered, with nothing changed in between.
-
-**→ Full chapter: [Six loadings of the same save](docs/six-loadings-of-the-same-save.md)**
-
 ## The protocol
 
-Launch a craft, move it off the runway onto bare ground with the debug menu, let it settle and save
-once — then load that same save, wait for the digits to stop moving, press *Record*, and do it again
-five or six times. One loading proves nothing: the error is drawn afresh every time, and can come out
-small by luck. Step by step, with screenshots.
+Three protocols, one for each way the game can set a craft down on the ground. All three fill the
+same window.
 
-**→ Full chapter: [The protocol](docs/the-protocol.md)**
+**Loading the same save.** Launch a craft, move it off the runway onto bare ground with the debug
+menu, let it settle and save once — then load that same save, wait for the digits to stop moving,
+press *Record*, and do it again five or six times. One loading proves nothing: the error is drawn
+afresh every time, and can come out small by luck. Step by step, with screenshots.
+
+**→ Full chapter: [The protocol: loading the same save](docs/the-protocol-loading.md)**
+
+**Coming back to a craft you left.** This one loads nothing at all. A craft stays parked while you
+drive a rover away from it, past 2500 m, where the game unloads it — then back to within 200 m, where
+its physics starts again. Five records per round trip, and as many round trips as you like, without
+ever changing scene.
+
+**→ Full chapter: [The protocol: coming back to a craft you left](docs/the-protocol-approach.md)**
+
+**Switching to a craft far away.** Two craft landed 1.97 km apart, in a save that comes with this
+mod. Load the save while flying one, press *Record*, switch to the other with the game's own key, and
+press *Record* again. Then load the same save again, six times in all.
+
+**→ Full chapter: [The protocol: switching to a craft far away](docs/the-protocol-switching.md)**
+
+## The measurements
+
+Taken in an install with Harmony, ModuleManager and
+[KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes) — what most players run —
+with this mod added.
+
+**Loading the same save** ([the protocol in full](docs/the-protocol-loading.md)). The same save,
+loaded six times, on Kerbin, on the Mun, on Minmus and on Gilly. The computed height comes back with
+the same digits every time — spread over 0.000 mm on Minmus, four hundredths of a millimetre at worst
+on sloping ground. The ground the craft is standing on never comes back twice: lowest to highest,
+108.1 mm on Kerbin, 15.0 mm on the Mun, 4.1 mm on Minmus, 3.0 mm on Gilly. One held still and the
+other wandered, with nothing changed in between.
+
+**→ Full chapter: [The measurements: loading the same save](docs/the-measurements-loading.md)**
+
+**Coming back to a craft you left** ([the protocol in full](docs/the-protocol-approach.md)). Six
+round trips in a row on Kerbin, in a single flight, with nothing loaded at any point. The computed
+height reads the same digits on every line; the ground under the craft comes back somewhere else
+every time, by 2.7 to 21.8 mm, and it has already moved by the time the craft is back in range,
+before physics takes it over.
+
+**→ Full chapter: [The measurements: coming back to a craft you left](docs/the-measurements-approach.md)**
+
+**Switching to a craft far away** ([the protocol in full](docs/the-protocol-switching.md)). Six
+rounds on Kerbin, each starting by loading the save. The ground under the capsule is somewhere else at
+every loading, over 120.4 mm, and switching to the capsule does not move it: the two lines of a round
+agree to within five thousandths of a millimetre.
+
+**→ Full chapter: [The measurements: switching to a craft far away](docs/the-measurements-switching.md)**
 
 ## Get it
 
